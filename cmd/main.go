@@ -28,7 +28,7 @@ func main() {
 		Handler: router,
 	}
 
-	fmt.Println("Starting server...")
+	fmt.Println("Server starting on port:" + portString)
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
