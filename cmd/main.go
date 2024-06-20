@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Kudzeri/Boot.dev-pokedex-go/iternal"
 	"github.com/go-chi/chi"
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
@@ -34,6 +35,11 @@ func main() {
 	})
 
 	router.Use(c.Handler)
+
+	V1Router := chi.NewRouter()
+	V1Router.Get("/healthz", iternal.HandlerReadiness)
+	V1Router.Get("/err", iternal.HandlerErr)
+	router.Mount("/v1", V1Router)
 
 	srv := &http.Server{
 		Addr:    ":" + portString,
